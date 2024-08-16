@@ -9,6 +9,9 @@ import { useRouter } from "next/navigation";
 import Shortener from "../component/shorten";
 import { FaRegUserCircle } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
+import Link from "next/link";
+import { MdDashboard } from "react-icons/md";
+import { CiSettings } from "react-icons/ci";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +25,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-   
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
@@ -54,32 +56,50 @@ export default function RootLayout({
   //   );
   // }
   return (
-      <div className={inter.className}>
-        <div className="flex h-screen overflow-hidden">
-          <div className="h-screen">
-            <Sidebar />
-          </div>
-          <div className="flex-1 overflow-y-auto">
-            <main className="sticky bg-white top-0 z-50  flex justify-between items-center py-3 px-6 border-solid border-2 border-slate-200">
-              <nav>
+    <div className={inter.className}>
+      <div className="flex h-screen overflow-hidden">
+        <div className="h-screen xs:w-screen">
+          <Sidebar />
+        </div>
+        <div className="flex-1 overflow-y-auto top-0 md:relative md:top-auto">
+          <main className="fixed inset-x-0 bg-white top-0 z-50 container mx-auto flex justify-between items-center py-3 px-6 border-solid border-2 border-slate-200 xs:py-8">
+            <div className="flex items-center gap-4">
+              <div >
                 <h1 className=" font-bold text-base">Dashboard</h1>
-              </nav>
-              <div className="flex items-center gap-4">
-                <div>
-                <Shortener />
-                </div>
-                <div className="flex gap-1">
-                  <FaRegUserCircle className="text-2xl text-slate-300 cursor-pointer" />
-                  <h1 className="text-slate-400">{user?.email}</h1>
-                  <h1 className="text-slate-400">{user?.displayName}</h1>
-                </div>
               </div>
-            </main>
-            <div className="z-0 ">
-            {children}
             </div>
-          </div>
+            <div className="flex gap-1">
+                <FaRegUserCircle className="text-2xl text-slate-300 cursor-pointer" />
+                <h1 className="text-slate-400">{user?.email}</h1>
+                {/* <h1 className="text-slate-400">{user?.displayName}</h1> */}
+              </div>
+          </main>
+          <div className="z-0 ">{children}</div>
+        </div>
+
+        <div className=" fixed inset-x-0 bottom-0 bg-gray-800 text-white md:hidden md:relative md:top-0 md:bottom-auto ">
+          <nav className="flex justify-around p-4">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-1 font-bold py-2 px-4 rounded focus:outline-none focus:bg-slate-200 focus:ring-blue-300"
+            >
+              <p>
+                <MdDashboard className="text-slate-400 text-xl font-bold" />
+              </p>
+              Dashboard
+            </Link>
+            <Link
+              href="/dashboard/setting"
+              className="flex items-center gap-1 mt-1 font-bold py-2 px-4 rounded focus:outline-none focus:bg-slate-200 focus:ring-blue-300"
+            >
+              <p>
+                <CiSettings className="text-slate-400 text-2xl font-bold" />
+              </p>
+              Setting
+            </Link>
+          </nav>
         </div>
       </div>
+    </div>
   );
 }

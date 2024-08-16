@@ -1,94 +1,88 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-'use client';
-import Logo from "../component/sidebar";
+"use client";
 import { useState, useEffect, ReactNode } from "react";
 import { auth } from "../firebase/config";
-import { onAuthStateChanged, User, signOut } from "firebase/auth";
+// import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import Shortener from "../component/shorten";
-import Link from "next/link";
 import { GiNetworkBars } from "react-icons/gi";
-import {LinkDetails} from "../lib/type"
+import { LinkDetails } from "../lib/type";
 import { handleGetLinks } from "../component/action";
-interface Pageprops {
-  children: ReactNode;
-}
+import Link from "next/link";
+import { FaRegCopy } from "react-icons/fa";
+
+
+// interface Pageprops {
+//   children: ReactNode;
+// }
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default function Page() {
   const [link, setLink] = useState<LinkDetails[] | null>(null);
-  const router = useRouter()
+  const router = useRouter();
   // const links = await handleGetLinks();
   //   console.log(links)
   useEffect(() => {
     const fetchedLink = async () => {
       const links = await handleGetLinks();
-      const ascLink = links.sort((a,b) => b.createdAt?.toDate()?.getTime() - a.createdAt?.toDate()?.getTime() );
+      const ascLink = links.sort(
+        (a, b) =>
+          b.createdAt?.toDate()?.getTime() - a.createdAt?.toDate()?.getTime()
+      );
       setLink(ascLink);
       console.log(links);
     };
     fetchedLink(); // Call the function to fetch data when the component mounts
   }, []);
 
- 
   return (
-    <div className="mb-32 md:mb-4">
-      <h1 className="font-bold text-3xl text-center my-2">
-        Links
-      </h1>
+    <div className="mb-32  md:mb-4 mx-3 ">
       <div>
-      {link && link.map((Link, index) => (
-        <div key={index} className="flex gap-28 p-4 my-5 shadow-lg items-center justify-between mt-4">
-          <div className="flex-1 mb-2 my-2 flex flex-col gap-3">
-            <p className="text-2xl font-bold underline">{Link.name}</p>
-            <div className="w-56">
-              <p className="truncate text-current text-sm">{Link.link}</p>
-            </div>
-            <p className="text-xs font-light">{Link.shortLink}</p>
-            <p className="text-xs font-thin">{Link.createdAt.toDate().toDateString()}</p>
-          </div>
-          <div>
-            <p className="text-sm font-bold">{Link.clicks}</p>
-            <GiNetworkBars className="text-green-800 text-lg font-extrabold" />
-          </div>
+        <h1 className="font-bold text-2xl my-2 ">Links</h1>
+      </div>
+
+      <div>
+        <div className="mt-5 relative ">
+          
+          <Shortener />
         </div>
-      ))}
+        {link &&
+          link.map((items, index) => (
+            <div
+              key={index}
+              className="flex p-4 my-5 shadow-lg items-center justify-between mt-4 "
+            >
+              <div className="flex-1 mb-2 my-2 flex flex-col gap-3">
+                <p className="text-2xl font-bold underline">{items.name}</p>
+                <div className="w-56">
+                  <p className="truncate text-current text-sm">{items.link}</p>
+                </div>
+                <div className="flex gap-5 ">
+                  <Link href={`/${items.shortLink}`}>
+                    <p className="text-xs font-light underline">
+                      link-shorten-beryl.vercel.app/{items.shortLink}
+                    </p>
+                  </Link>
+                  <FaRegCopy
+                    className="cursor-pointer"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `link-shorten-beryl.vercel.app/${items.shortLink}`
+                      );
+                    }}
+                  />
+                </div>
+                <p className="text-xs font-thin">
+                  {items.createdAt.toDate().toDateString()}
+                </p>
+              </div>
+              <div className="">
+                <p className="text-sm font-bold">{items.clicks}</p>
+                <GiNetworkBars className="text-green-800 text-lg font-extrabold" />
+              </div>
+            </div>
+          ))}
       </div>
     </div>
   );
-
-  // return (
-  //   <div>
-  //     <div>
-  //       <h1 className="text-center text-2xl font-bold my-4">links</h1>
-  //       <div className="flex justify-center ">
-  //         <div>
-  //           {links.map((Link, index) => {
-  //             // const longUrl = Link.longUrl
-  //             // const formatted = longUrl.length > 30 ? ${longUrl.substring(0, 30)}... : link
-  //             return (
-  //               <div key={index} className="flex gap-28 p-4 my-5  shadow-lg items-center  justify-between mt-4">
-  //                 <div className="flex-1 mb-2 my-2 flex flex-col gap-3" >
-  //                   <p className="text-2xl font-bold underline">{Link.name}</p>
-  //                   <div className="w-56">
-  //                   <p className="truncate text-current text-sm ">{Link.longUrl}</p>
-  //                   </div>
-  //                   <p className=" text-xs font-light">{Link.shortUrl}</p>
-  //                   <p className=" text-xs font-thin">{Link.createdAt}</p>
-  //                 </div>
-  //                 <div>
-  //                   <p className=" text-sm font-bold">{Link.clicks}</p>
-  //                   <GiNetworkBars className="text-green-800 text-lg font-extrabold"/>
-  //                 </div>
-  //               </div>
-  //             );
-  //           })}
-  //         </div>
-  //       </div>
-
-  //     </div>
-   
-  //   </div>
-  // );
 }

@@ -49,11 +49,11 @@ export default function SignUpAccount() {
     <div className="mx-auto ">
       <Dialog>
         <DialogTrigger asChild>
-          <div className="cursor-pointer">signUp</div>
+          <div className="cursor-pointer">SignUp</div>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] ">
+        <DialogContent className="sm:max-w-[425px] w-[300px]">
           <DialogHeader>
-            <DialogTitle className="text-center">Create an Account</DialogTitle>
+            <DialogTitle className="text-center -mt-2">Create an Account</DialogTitle>
           </DialogHeader>
           <div className="grid  gap-4 py-4">
           <div className="grid grid-cols-2 items-center gap-1">
@@ -100,7 +100,7 @@ export default function SignUpAccount() {
                 className=" font-bold bg-blue-600 w-full cursor-pointer"
                 onClick={handleSignUp}
               >
-                Sign up
+                Signup
               </Button>
              
                 <p className="text-center">

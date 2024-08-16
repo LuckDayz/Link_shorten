@@ -51,11 +51,11 @@ export default function LoginAccount() {
     <div className="mx-auto ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Login</Button>
+          <Button variant="outline">Get Started</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px] ">
+        <DialogContent className="sm:max-w-[425px] w-[300px]  ">
           <DialogHeader>
-            <DialogTitle className="text-center">Welcome back!!</DialogTitle>
+            <DialogTitle className="text-center -mt-2">Welcome back!!</DialogTitle>
           </DialogHeader>
           <div className="grid  gap-4 py-4">
             <div className="grid grid-cols-2 items-center gap-1">

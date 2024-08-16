@@ -96,4 +96,38 @@ export async function handleGetLinks() {
       }
     });
   });
+  
+}
+
+export const redirectLink = async (slug: string) => {
+  try {
+        const docRef = doc(db, "links", slug);
+        const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data(), docSnap.data().linkId, docSnap.data().userId);
+
+    } else {
+      console.log("No such document!");
+    }
+      const { linkId, userId } = docSnap.data()  as { linkId: string, userId: string };
+      const userLinkDoc = doc(db, "users", userId, "links", linkId);
+
+      await updateDoc(userLinkDoc, { clicks: increment(1) });
+      console.log("Document updated.");
+
+
+      let link = docSnap.data()?.link;
+
+      try {
+        new URL(link);
+      } catch (e) {
+        link = 'https://' + link;
+      }
+  
+      window.location.href = link;
+  } catch (e) {
+      console.error("Error getting document: ", e);
+      throw e;
+ }
 }

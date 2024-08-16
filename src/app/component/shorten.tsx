@@ -6,8 +6,10 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
+  DialogClose,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { FaPlus } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { handleCreateShortenLink } from "./action";
 import Link from "next/link";
@@ -42,7 +44,7 @@ export default function Shortener() {
     <div className="mx-auto ">
       <Dialog>
         <DialogTrigger asChild>
-          <Button className="bg-blue-600 font-bold ">Shorten new link</Button>
+          <Button className="bg-blue-600 font-bold  gap-2 "><FaPlus className="text-xl font-bold"/>Create link</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px] ">
           <DialogHeader>
@@ -93,8 +95,12 @@ export default function Shortener() {
                 />
               </div>
               <div className="flex justify-between mt-2">
-                <Button variant="outline" className="  font-semibold" >Cancel</Button>
-                <Button className="  bg-blue-300 font-semibold" onClick={createShortLink}>Create</Button>
+              <Button variant="outline" className="  font-semibold" >
+              <DialogClose>Cancel</DialogClose></Button>
+              <Button className="  bg-blue-300 font-semibold" onClick={createShortLink}>
+              
+              <DialogClose>Create</DialogClose></Button>
+                
               </div>
             </div>
           </div>

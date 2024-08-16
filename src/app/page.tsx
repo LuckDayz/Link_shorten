@@ -4,7 +4,7 @@ import Hero from "./component/hero"
 
 export default function Home() {
   return (
-    <main className="h-screen pt-8 bg-slate-800">
+    <main className="h-full pt-8 bg-slate-800">
       <Header/>
       <Hero/>
     </main>
