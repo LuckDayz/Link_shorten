@@ -51,7 +51,7 @@ export default function RootLayout({
             className="motion-reduce:hidden bg-slate-300 animate-spin ..."
             viewBox="0 0 24 24"
           ></svg>
-          Processing
+          Processing...
         </p>
       </div>
     );
