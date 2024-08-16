@@ -12,7 +12,8 @@ import { FaPlus } from "react-icons/fa6";
 import Link from "next/link";
 import { MdDashboard } from "react-icons/md";
 import { CiSettings } from "react-icons/ci";
-
+import { Button } from "@/components/ui/button";
+import { CiLogout } from "react-icons/ci";
 const inter = Inter({ subsets: ["latin"] });
 
 // export const metadata: Metadata = {
@@ -97,6 +98,16 @@ export default function RootLayout({
               </p>
               Setting
             </Link>
+            <Button
+            variant="outline"
+            className="  text-xl text-red-800 font-bold border-none"
+            onClick={() => {
+              signOut(auth);
+            }}
+          >
+            logout
+            <CiLogout className=" text-2xl font-extrabold ml-1" />
+          </Button>
           </nav>
         </div>
       </div>
