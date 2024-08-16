@@ -8,5 +8,4 @@ export type LinkDetails = {
     createdAt: Timestamp
     customSlug?: string
 }
-
 export type CreateLink = Omit<LinkDetails, 'id'>;

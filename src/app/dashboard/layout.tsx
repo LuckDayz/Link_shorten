@@ -46,8 +46,8 @@ export default function RootLayout({
   if (loading) {
     return (
       <div className="grid place-content-center h-screen">
-        <p >
-        <svg
+        <p>
+          <svg
             className="motion-reduce:hidden bg-slate-300 animate-spin ..."
             viewBox="0 0 24 24"
           ></svg>
@@ -65,15 +65,15 @@ export default function RootLayout({
         <div className="flex-1 overflow-y-auto top-0 md:relative md:top-auto">
           <main className="fixed inset-x-0 bg-white top-0 z-50 container mx-auto flex justify-between items-center py-3 px-6 border-solid border-2 border-slate-200 xs:py-8">
             <div className="flex items-center gap-4">
-              <div >
+              <div>
                 <h1 className=" font-bold text-base">Dashboard</h1>
               </div>
             </div>
             <div className="flex gap-1">
-                <FaRegUserCircle className="text-2xl text-slate-300 cursor-pointer" />
-                <h1 className="text-slate-400">{user?.email}</h1>
-                {/* <h1 className="text-slate-400">{user?.displayName}</h1> */}
-              </div>
+              <FaRegUserCircle className="text-2xl text-slate-300 cursor-pointer" />
+              <h1 className="text-slate-400">{user?.email}</h1>
+              {/* <h1 className="text-slate-400">{user?.displayName}</h1> */}
+            </div>
           </main>
           <div className="z-0 ">{children}</div>
         </div>
@@ -99,15 +99,15 @@ export default function RootLayout({
               Setting
             </Link>
             <Button
-            variant="outline"
-            className="  text-xl text-red-800 font-bold border-none"
-            onClick={() => {
-              signOut(auth);
-            }}
-          >
-            logout
-            <CiLogout className=" text-2xl font-extrabold ml-1" />
-          </Button>
+              variant="outline"
+              className="  text-xl text-red-800 font-bold border-none"
+              onClick={() => {
+                signOut(auth);
+              }}
+            >
+              logout
+              <CiLogout className=" text-2xl font-extrabold ml-1" />
+            </Button>
           </nav>
         </div>
       </div>
