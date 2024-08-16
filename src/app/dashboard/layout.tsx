@@ -42,19 +42,19 @@ export default function RootLayout({
       unsubscribe();
     };
   }, [router]);
-  // if (loading) {
-  //   return (
-  //     <div className="grid place-content-center h-screen">
-  //       <p >
-  //       <svg
-  //           className="motion-reduce:hidden bg-slate-300 animate-spin ..."
-  //           viewBox="0 0 24 24"
-  //         ></svg>
-  //         Processing
-  //       </p>
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="grid place-content-center h-screen">
+        <p >
+        <svg
+            className="motion-reduce:hidden bg-slate-300 animate-spin ..."
+            viewBox="0 0 24 24"
+          ></svg>
+          Processing
+        </p>
+      </div>
+    );
+  }
   return (
     <div className={inter.className}>
       <div className="flex h-screen overflow-hidden">
