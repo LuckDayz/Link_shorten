@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState, useEffect, FormEvent } from "react";
-import { signInWithEmailAndPassword, signInWithPhoneNumber } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPhoneNumber } from "firebase/auth";
 import { auth } from "@/app/firebase/config";
 import { useRouter } from "next/navigation";
 
@@ -32,7 +32,7 @@ export default function SignUpAccount() {
       const handleSignUp = async (e: FormEvent) => {
         e.preventDefault()
         try {
-            const res = await signInWithEmailAndPassword(auth, form.email, form.password)
+            const res = await createUserWithEmailAndPassword(auth, form.email, form.password)
             // const resPhone =  res(auth, )
             console.log(res)
             if(res?.user){
